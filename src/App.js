@@ -1,5 +1,5 @@
 import React from 'react';
-
+import ProtectedRoute from './ProtectedRoute'
 import {BrowserRouter as Router , Switch ,Route } from 'react-router-dom'
 import LandingPage from './components/LandingPage'
 import Profile from './components/Profile'
@@ -12,7 +12,7 @@ const App = () => (
           <NavBar/>
           <Switch>
             <Route exact path = '/' component = {LandingPage}/>
-            <Route exact path = '/profile' component = {Profile}/>
+            <ProtectedRoute exact path = '/profile' component = {Profile}/>
           </Switch>
         </Router>
   </div>
