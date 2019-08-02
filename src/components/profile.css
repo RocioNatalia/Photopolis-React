@@ -1,0 +1,16 @@
+.contenedorPerfil {
+    margin: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+}
+
+.paper {
+    padding: 10px;
+    color: black;
+}
+
+h1 h2 {
+    text-align: left
+}

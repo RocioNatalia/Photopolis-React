@@ -1,4 +1,5 @@
 import React from 'react';
+import auth from '../auth'
 //Permite que la barra pueda verse siempre 
 import { withRouter } from 'react-router-dom' 
 //Material UI
@@ -11,17 +12,23 @@ import InputBase from '@material-ui/core/InputBase';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import AccountBox from '@material-ui/icons/AccountBox';
 import ExitToApp from '@material-ui/icons/ExitToApp';
+import Home from '@material-ui/icons/Home';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import Button from '@material-ui/core/Button'
 //logo
 import logo from '../img/logo.png'
 
 const useStyles = makeStyles(theme => ({
+  button: {
+    color :'white',
+  },
+  buttonMobile: {
+    color :'black',
+  },
     nav: {
         backgroundColor: '#011638',
-        color: '#CDCDCD'
       },
   grow: {
     flexGrow: 1,
@@ -84,7 +91,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function PrimarySearchAppBar() {
+function PrimarySearchAppBar(props) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -132,30 +139,62 @@ function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
+    {auth.user !== null ? 
+
+      <div>
       <MenuItem>
-      <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile</p>
+      <Button 
+              color="primary" 
+              className={classes.buttonMobile}
+              onClick= {
+                      ()=>props.history.push('/')
+                    }>
+              <Home />
+              Home
+      </Button>
       </MenuItem>
+
       <MenuItem>
-      <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <ExitToApp />
-        </IconButton>
-      <p>Log Out</p>
+      <Button 
+              color="primary" 
+              className={classes.buttonMobile}
+              onClick= {
+                      ()=>props.history.push('/profile')
+                    }>
+              <AccountBox />
+              Perfil 
+      </Button>
+      </MenuItem>
+
+              <MenuItem>
+              <Button 
+              color="primary" 
+              className={classes.buttonMobile}
+              onClick= {
+                      ()=>props.history.push('/profile')
+                    }>
+              <ExitToApp/>
+              Cerrar sesión
+              </Button>
+              </MenuItem>
+      </div>
+      :
+    <MenuItem>
+      <Button 
+              color="primary" 
+              className={classes.buttonMobile}
+              onClick= {
+                      ()=>props.history.push('/singin')
+                    } >
+              
+              <AccountBox />
+              Iniciar Sesión
+              </Button>
+      </MenuItem>
+    }
       
-      </MenuItem>
     </Menu>
+     
   );
 
   return (
@@ -167,6 +206,9 @@ function PrimarySearchAppBar() {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
+            onClick= {
+                      ()=>props.history.push('/')
+                    }
           >
             <img src={logo} alt='logo' height='32px' />
           </IconButton>
@@ -190,28 +232,57 @@ function PrimarySearchAppBar() {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              color="inherit"
-            >
+            {/*Parte condicional */}
+
+            {auth.user !== null ? 
+              <div>
+              <Button 
+              color="primary" 
+              className={classes.button}
+              onClick= {
+                      ()=>props.history.push('/')
+                    }>
+              <Home />
+              Home
+              </Button>
+
+              <Button 
+              color="primary" 
+              className={classes.button}
+              onClick= {
+                      ()=>props.history.push('/profile')
+                    }>
               <AccountBox />
-            </IconButton>
-        
-            <p>Profile</p>
-          
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              color="inherit"
-            >
+              Perfil 
+              </Button>
+
+              <Button 
+              color="primary" 
+              className={classes.button}
+              onClick={
+                ()=>
+              auth.logout(
+                ()=>{
+                            props.history.push('/')
+                    }    )}>
               <ExitToApp />
-            </IconButton>
-              <p>Log Out</p>
+              Cerrar Sesión
+              </Button>
+
+              </div>
+
+            :
+            <Button 
+              color="primary" 
+              className={classes.button}
+              onClick= {
+                      ()=>props.history.push('/singin')
+                    } >
+              
+              <AccountBox />
+              Iniciar Sesión
+              </Button>
+            }
 
           </div>
 

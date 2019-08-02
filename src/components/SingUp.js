@@ -5,47 +5,54 @@ import { TextField } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
-import Link from '@material-ui/core/Link';
-
-
+import Link from '@material-ui/core/Link'
 import logo from '../img/logo.png'
 
 const styles = () => ({
+    
     button: {
       margin: '5px',
-      color: 'white'
     },
     input: {
       display: 'none',
+      width: '100%'
     },
   });
 
-class SingIn extends Component {
+class SingUp extends Component {
     state= {
         email:'' ,
         password : ''
     }
 
-    authEmailPass = () => {
+    registerEmailPass = () => {
         const userData = {email:this.state.email , password: this.state.password}
-        auth.login(userData, () => this.props.history.push('/'))
+        auth.register(userData, () => this.props.history.push('/singin'))
         }
 
         handleChange = name => event => this.setState({[name]: event.target.value})
         render(){
             const {classes} = this.props
+            
             return (
-              
                 <div className= 'wrapper'>
-                  <div className = 'hiden' />
+                   <div className = 'hiden' />
                   <Paper className='paper'>
                   <img src={logo} alt='logo' height='50px' />
-                    <h1> Iniciar Sesión</h1>
+                    <h1> Te damos la bienvenida a PhotoPolis :)</h1>
                     <hr/>
                     <form 
-     
                      noValidate autoComplete='off'>
-                    <TextField  
+
+                    <TextField
+                    fullWidth
+                    id="outlined-name"
+                    label="Username"
+                    className={classes.textField}
+                    margin="normal"
+                    variant="outlined"
+                    />
+                    <TextField
                     fullWidth
                     id='outlined-email-input'
                     label='Email'
@@ -54,10 +61,9 @@ class SingIn extends Component {
                     type='email'
                     autoComplete='email'
                     margin='normal'
-                    variant="outlined"/> 
+                    variant="outlined" /> 
                     
-                    {/* Contraseña */}
-                    <TextField 
+                    <TextField
                     fullWidth 
                     id="outlined-password-input"
                     label='Password'
@@ -68,28 +74,22 @@ class SingIn extends Component {
                     margin='normal'
                     variant="outlined" /> 
 
-                    <Button
-                    onClick={this.authEmailPass} 
-                    variant='contained' 
-                    color= 'primary'
-                    className={classes.button}
-                    >Iniciar Sesión
+                    <Button onClick={this.registerEmailPass} variant='contained' color='primary' className={classes.button}
+                    >
+                        Registarme
                     </Button>
-
-                    </form>
                     <br/>
-                   
-
+                    <br/>
                     < Link onClick={
-                ()=>{
-                    this.props.history.push('/singup')
-                }
-                }
-            > ¿No tienes cuenta? Registrate aqui 
+                      ()=>{
+                          this.props.history.push('/singin')
+                      }
+                    }
+            > ¿Ya tienes cuenta? Inicia sesión aqui 
                 
             </Link>
 
-
+                    </form>
                     </Paper>
                 </div>
             )
@@ -97,4 +97,4 @@ class SingIn extends Component {
     }
 }
 
-export default withStyles(styles)(SingIn)
+export default withStyles(styles)(SingUp)

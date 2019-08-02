@@ -3,6 +3,7 @@ import firebase from './firebase'
 const auth = {
     autenticado: false,
     user: null,
+   
 
     login(userData, cb) {
         firebase
