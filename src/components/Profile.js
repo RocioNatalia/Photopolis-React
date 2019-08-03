@@ -21,6 +21,26 @@ export default class Profile extends Component {
         .then(json => this.setState({ likes : json }))
   }
 
+  deleteLike = (foto) => {
+    console.log(foto)
+    const data = {
+        "photo_id" : foto.photo_id,
+        "user_id" : auth.user.uid
+    }
+
+    fetch('http://localhost:3001/api/delete', {
+      method: 'DELETE',
+      body: JSON.stringify(data),
+      headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                },
+    })
+    .then(res => res.json())
+    .then(() => this.likes())
+
+  }
+
 
     render() {
         return (
@@ -39,7 +59,7 @@ export default class Profile extends Component {
                     <img className="foto" src={foto.url} alt={foto.id} height='500px' width='100%' />
                     <IconButton 
                       aria-label="add to favorites"
-                      onClick={() => console.log('deberia borrar')}>
+                      onClick={() => this.deleteLike(foto)}>
                         <DeleteSweep />
                       </IconButton>
                 </Paper> )
