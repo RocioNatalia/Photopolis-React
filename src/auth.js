@@ -3,13 +3,14 @@ import firebase from './firebase'
 const auth = {
     autenticado: false,
     user: null,
-   
+    error: null,
 
     login(userData, cb) {
         firebase
             .auth()
             .signInWithEmailAndPassword(userData.email, userData.password)
             .then(a => {
+                this.error = null
                 if (a.operationType) {
                     const { user } = a
                     console.log(user)
@@ -22,7 +23,7 @@ const auth = {
                     console.log('no funciono')
                 }
             })
-            .catch(error => console.log(error))
+            .catch(error => this.error = error)
     },
     logout(cb) {
         this.autenticado = false

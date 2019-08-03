@@ -23,15 +23,22 @@ const styles = () => ({
 class SingIn extends Component {
     state= {
         email:'' ,
-        password : ''
+        password : '',
+        error: null
     }
-
+    showError = () => {
+      this.setState({error: auth.error.message})
+    }
     authEmailPass = () => {
         const userData = {email:this.state.email , password: this.state.password}
         auth.login(userData, () => this.props.history.push('/'))
-        }
+        if(auth.error){
+          this.showError()
+        } 
+    }
 
-        handleChange = name => event => this.setState({[name]: event.target.value})
+    handleChange = name => event => this.setState({[name]: event.target.value})
+    
         render(){
             const {classes} = this.props
             return (
@@ -79,13 +86,16 @@ class SingIn extends Component {
                     </form>
                     <br/>
                    
+                {this.state.error}
 
-                    < Link onClick={
+                    <Link onClick={
                 ()=>{
                     this.props.history.push('/singup')
                 }
                 }
-            > ¿No tienes cuenta? Registrate aqui 
+            >
+            <hr/> 
+            ¿No tienes cuenta? Registrate aqui 
                 
             </Link>
 

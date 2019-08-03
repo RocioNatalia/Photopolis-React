@@ -33,17 +33,34 @@ class FullWidthGrid extends React.Component {
       .then(json => this.setState({ photos: json }))
   }
 
+  nextPage = () => {
+    this.setState({ page: this.state.page + 1 })
+    this.images()
+  }
+  prePage = () => {
+    this.setState({ page: this.state.page - 1 })
+    this.images()
+  }
+
+  darLike = (foto) => {
+    fetch('http://localhost:3001/api/images', {
+      method: 'POST',
+      body: JSON.stringify({
+                            "user_id": `${auth.user.uid}`, 
+                            "photo_id": `${foto.id}`, 
+                            "url" : `${foto.urls.small}`
+                            }),
+      headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+                },
+    })
+    .then(res => res.json())
+    .catch(error => console.error('Error:', error))
+  }
 
   render() {
 
-    const nextPage = () => {
-      this.setState({ page: this.state.page + 1 })
-      this.images()
-    }
-    const prePage = () => {
-      this.setState({ page: this.state.page - 1 })
-      this.images()
-    }
     
     return (
       <div>
@@ -78,24 +95,7 @@ class FullWidthGrid extends React.Component {
                       
                       <IconButton 
                       aria-label="add to favorites"
-                      onClick={() => {
-                        fetch('http://localhost:3000/api/images', {
-                            method: 'POST',
-                            body: JSON.stringify({
-                                                  user_id: auth.user.id , 
-                                                  photo_id: foto.id , 
-                                                  url :foto.urls.small
-                                                  }),
-                            headers: {
-                                      'Accept': 'application/json',
-                                      'Content-Type': 'application/json'
-                                      },
-                        })
-                        .then(res => res.json())
-                        .catch(error => console.error('Error:', error))
-                        
-                        
-                      }}>
+                      onClick={() => this.darLike(foto)}>
                         <FavoriteIcon />
                       </IconButton>
                     
@@ -111,14 +111,14 @@ class FullWidthGrid extends React.Component {
               <Button
                 variant="contained"
                 color="primary"
-                onClick={prePage}>
+                onClick={this.prePage}>
                 <ArrowBackIos />
                 Anterior
                 </Button>
               <Button
                 variant="contained"
                 color="primary"
-                onClick={nextPage} >
+                onClick={this.nextPage} >
                 Siguiente
                   <ArrowForwardIos />
               </Button>
