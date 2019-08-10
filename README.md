@@ -1,5 +1,5 @@
 # PhotoPolis React-App :camera:
-Aplicacion para dar like a fotos y almacenarlas en el perfil.
+Single Page Application para dar like a fotos y almacenarlas en el perfil.
 ### :heavy_check_mark: Realizada con:
  
  * React JS
