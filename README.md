@@ -1,12 +1,20 @@
-React
-Material UI
-Firebase
+# PhotoPolis React-App :camera:
+Aplicacion para dar like a fotos y almacenarlas en el perfil.
+### :heavy_check_mark: Realizada con:
+ 
+ * React JS
+ * Create React App
+ * Material UI
+ * Unsplash API
+ * Grid
+ * Flaticon
+ 
+### :heavy_check_mark: Para ejecutar localmente: 
+```
+npm start
+```
+### :heavy_check_mark: Preview:
 
-##Colors
-
-#011638 Azul oscuro
-#364156 azul claro
-#CDCDCD gris
-#DFF8EB celeste
-#214E34 verde 
-
+<p align="left">
+  <img src=https:// />
+</p>
