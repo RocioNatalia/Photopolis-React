@@ -17,5 +17,5 @@ npm start
 ### :heavy_check_mark: Preview:
 
 <p align="left">
-  <img src=https:// />
+  <img src= https://raw.githubusercontent.com/RocioNatalia/SPA-Photopolis/master/preview2.png />
 </p>
