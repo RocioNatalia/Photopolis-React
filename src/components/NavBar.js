@@ -1,7 +1,7 @@
 import React from 'react';
 import auth from '../auth'
 //Permite que la barra pueda verse siempre 
-import { withRouter } from 'react-router-dom' 
+import { withRouter } from 'react-router-dom'
 //Material UI
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -21,27 +21,15 @@ import Button from '@material-ui/core/Button'
 import logo from '../img/logo.png'
 
 const useStyles = makeStyles(theme => ({
-  button: {
-    color :'white',
-  },
-  buttonMobile: {
-    color :'black',
-  },
-    nav: {
-        backgroundColor: '#011638',
-      },
-  grow: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight:0,
-  },
+  button: { color: 'white'},
+  buttonMobile: {color: 'black'},
+  nav: {backgroundColor: '#011638'},
+  grow: {flexGrow: 1},
+  menuButton: {marginRight: 0},
   title: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
-  },
+          display:'none',
+          [theme.breakpoints.up('sm')]: {display: 'block'}
+          },
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -139,62 +127,62 @@ function PrimarySearchAppBar(props) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-    {auth.user !== null ? 
+      {auth.user !== null ?
 
-      <div>
-      <MenuItem>
-      <Button 
-              color="primary" 
+        <div>
+          <MenuItem>
+            <Button
+              color="primary"
               className={classes.buttonMobile}
-              onClick= {
-                      ()=>props.history.push('/')
-                    }>
+              onClick={
+                () => props.history.push('/')
+              }>
               <Home />
               Home
       </Button>
-      </MenuItem>
+          </MenuItem>
 
-      <MenuItem>
-      <Button 
-              color="primary" 
+          <MenuItem>
+            <Button
+              color="primary"
               className={classes.buttonMobile}
-              onClick= {
-                      ()=>props.history.push('/profile')
-                    }>
+              onClick={
+                () => props.history.push('/profile')
+              }>
               <AccountBox />
-              Perfil 
+              Perfil
       </Button>
-      </MenuItem>
+          </MenuItem>
 
-              <MenuItem>
-              <Button 
-              color="primary" 
+          <MenuItem>
+            <Button
+              color="primary"
               className={classes.buttonMobile}
-              onClick= {
-                      ()=>props.history.push('/profile')
-                    }>
-              <ExitToApp/>
+              onClick={
+                () => props.history.push('/profile')
+              }>
+              <ExitToApp />
               Cerrar sesión
               </Button>
-              </MenuItem>
-      </div>
-      :
-    <MenuItem>
-      <Button 
-              color="primary" 
-              className={classes.buttonMobile}
-              onClick= {
-                      ()=>props.history.push('/singin')
-                    } >
-              
-              <AccountBox />
-              Iniciar Sesión
+          </MenuItem>
+        </div>
+        :
+        <MenuItem>
+          <Button
+            color="primary"
+            className={classes.buttonMobile}
+            onClick={
+              () => props.history.push('/singin')
+            } >
+
+            <AccountBox />
+            Iniciar Sesión
               </Button>
-      </MenuItem>
-    }
-      
+        </MenuItem>
+      }
+
     </Menu>
-     
+
   );
 
   return (
@@ -206,9 +194,9 @@ function PrimarySearchAppBar(props) {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
-            onClick= {
-                      ()=>props.history.push('/')
-                    }
+            onClick={
+              () => props.history.push('/')
+            }
           >
             <img src={logo} alt='logo' height='32px' />
           </IconButton>
@@ -231,56 +219,56 @@ function PrimarySearchAppBar(props) {
           </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            
+
             {/*Parte condicional */}
 
-            {auth.user !== null ? 
+            {auth.user !== null ?
               <div>
-              <Button 
-              color="primary" 
-              className={classes.button}
-              onClick= {
-                      ()=>props.history.push('/')
-                    }>
-              <Home />
-              Home
+                <Button
+                  color="primary"
+                  className={classes.button}
+                  onClick={
+                    () => props.history.push('/')
+                  }>
+                  <Home />
+                  Home
               </Button>
 
-              <Button 
-              color="primary" 
-              className={classes.button}
-              onClick= {
-                      ()=>props.history.push('/profile')
-                    }>
-              <AccountBox />
-              Perfil 
+                <Button
+                  color="primary"
+                  className={classes.button}
+                  onClick={
+                    () => props.history.push('/profile')
+                  }>
+                  <AccountBox />
+                  Perfil
               </Button>
 
-              <Button 
-              color="primary" 
-              className={classes.button}
-              onClick={
-                ()=>
-              auth.logout(
-                ()=>{
-                            props.history.push('/')
-                    }    )}>
-              <ExitToApp />
-              Cerrar Sesión
+                <Button
+                  color="primary"
+                  className={classes.button}
+                  onClick={
+                    () =>
+                      auth.logout(
+                        () => {
+                          props.history.push('/')
+                        })}>
+                  <ExitToApp />
+                  Cerrar Sesión
               </Button>
 
               </div>
 
-            :
-            <Button 
-              color="primary" 
-              className={classes.button}
-              onClick= {
-                      ()=>props.history.push('/singin')
-                    } >
-              
-              <AccountBox />
-              Iniciar Sesión
+              :
+              <Button
+                color="primary"
+                className={classes.button}
+                onClick={
+                  () => props.history.push('/singin')
+                } >
+
+                <AccountBox />
+                Iniciar Sesión
               </Button>
             }
 
