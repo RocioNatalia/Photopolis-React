@@ -4,6 +4,7 @@ Single Page Application para dar like a fotos y almacenarlas en el perfil.
  
  * React JS
  * Create React App
+ * React Router
  * Material UI
  * Unsplash API
  * Grid
